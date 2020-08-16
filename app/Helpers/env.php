@@ -1,5 +1,5 @@
 <?php
 
-function env(var, value=null) {
+function env($var, $value=null) {
 
 }

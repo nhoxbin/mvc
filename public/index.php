@@ -1,22 +1,24 @@
 <?php
 
-$controllerPath = '../app/Http/Controllers';
+$gPath = include '../config/path.php';
 
-require $controllerPath . '/Controller.php';
+// load helper and mvc
+$files = array_merge(glob($gPath['helper'] . '/*'), glob($gPath['core'] . '/*'));
+foreach ($files as $file) {
+	require $file;
+}
 
-$controllerName = ucfirst(strtolower($_GET['controller'] ?? 'Home')) . 'Controller';
-if (!file_exists("${controllerPath}/${controllerName}.php"))
-	die('controller not found!!!');
+$app = config('app');
+if ($app['env'] === 'local' && $app['debug'] === true) {
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	set_error_handler('showError');
+}
 
-// require controller
-require "${controllerPath}/${controllerName}.php";
+require __DIR__ . '/../vendor/autoload.php';
+
 // init controller
-$controller = new $controllerName;
-
-// check method exists
-$method = strtolower($_GET['method'] ?? 'index');
-if (!method_exists($controller, $method))
-	die('Method not found!!!');
-
-// init method
-$controller->$method();
+$controller = new Core\Controller;
+// model must be load first
+$controller->initModel();
+$controller->initRequest();

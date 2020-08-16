@@ -1,0 +1,2 @@
+<?= $home ?>
+<h1>Category index</h1>

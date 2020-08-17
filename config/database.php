@@ -7,11 +7,11 @@ return [
 
     'port' => '3306',
 
-    'database' => 'dzpayvn',
+    'database' => 'mvc',
 
     'username' => 'root',
 
     'password' => '',
     
-    'driver' => 'mysql',
+    'driver' => 'MySql',
 ];

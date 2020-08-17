@@ -2,49 +2,41 @@
 
 namespace Core;
 
-use Core\Database;
+use Database\Driver;
 
-class Model extends Database
+class Model
 {
-    protected $table;
-    protected $connection;
+    protected $result;
+    protected static $driver;
+    protected static $connection;
 
-    public function __construct($database) 
-    {
-        $this->connection = $database->getConnection();
+    public static function setDriver($driver) {
+        self::$driver = $driver;
     }
 
-    public static function get() {
+    public static function setTable($table) {
+        return self::$driver->setTable($table);
+    }
 
+    public static function all($columns = ['*']) {
+        $driver = self::setTable((new static)->table);
+        $result = $driver->all($columns);
+        return $result;
+
+        /*return static::query()->get(
+            is_array($columns) ? $columns : func_get_args()
+        );*/
+    }
+
+    public static function where($id, $value, $cond='=') {
+        $driver = self::setTable((new static)->table);
+        $result = $driver->where($id, $value, $cond);
+        return $result;
     }
 
     public static function find($id) {
-
-    }
-
-    public static function all() {
-        $sql = "SELECT * FROM {self::table}";
-        $query = parent::query($sql);
-        array_map(function($row) {
-            echo '<pre>';
-            echo print_r($row);
-            echo '</pre>';
-        }, $query);
-    }
-
-    public static function update() {
-
-    }
-    
-    public function create() {
-
-    }
-
-    public function store() {
-
-    }
-
-    public function delete() {
-
+        $driver = self::setTable((new static)->table);
+        $result = $driver->find($id);
+        return $result;
     }
 }

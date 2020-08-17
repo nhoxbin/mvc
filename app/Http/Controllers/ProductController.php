@@ -14,11 +14,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        // echo 'test';
-    	$products = Product::all();
-     //    echo $products;
-    	// echo '<pre>';
-    	// echo print_r($products);
-    	// echo '</pre>';die;
+    	$products = Product::find(1);
+        echo '<pre>';
+        echo print_r($products);
+        echo '</pre>';
     }
 }

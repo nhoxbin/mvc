@@ -20,5 +20,4 @@ require __DIR__ . '/../vendor/autoload.php';
 // init controller
 $controller = new Core\Controller;
 // model must be load first
-$controller->initModel();
 $controller->initRequest();

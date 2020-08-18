@@ -17,7 +17,8 @@ class App
     }
 
     public function initController() {
-    	$controllerName = ucfirst(strtolower($this->request->get('controller') ?? $this->controller)) . 'Controller';
+    	$controllerName = ucfirst(strtolower($this->request->get('controller') ?? $this->controller));
+    	$controllerName .= 'Controller';
         if (!file_exists(base_dir('controller') . "/$controllerName.php")) {
         	show404error('Controller');
         }

@@ -4,7 +4,7 @@ namespace DB;
 
 use Core\Database;
 
-class MySqlDriver extends Database
+class MySql extends Database
 {
     private $result;
     protected $table;

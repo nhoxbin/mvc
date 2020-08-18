@@ -15,5 +15,6 @@ if ($app['env'] === 'local' && $app['debug'] === true) {
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// init controller
+
 $app = new Core\App;
+$controller = new Core\Controller;

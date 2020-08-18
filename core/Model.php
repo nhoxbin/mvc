@@ -2,12 +2,12 @@
 
 namespace Core;
 
-use \DB\MySqlDriver;
-
 class Model
 {
     // protected $result;
+    protected $table;
     protected static $connection;
+    protected static $driver;
 
     public static function setConnection($connection) {
         self::$connection = $connection;
@@ -15,6 +15,10 @@ class Model
 
     public static function setTable($table) {
         return self::$driver->setTable($table);
+    }
+
+    public static function all() {
+        return self::setTable((new static)->table)->all();
     }
 
     /*public function get() {

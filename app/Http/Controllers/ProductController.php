@@ -9,11 +9,11 @@ class ProductController extends Controller
 {
     public function index()
     {
-    	echo __METHOD__;
-    	/*$products = Product::where('id', 1)->get();
+    	// echo __METHOD__;
+    	$products = Product::all();
         echo '<pre>';
         echo print_r($products);
-        echo '</pre>';*/
+        echo '</pre>';
     }
 
     public function show() {

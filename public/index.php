@@ -16,15 +16,4 @@ if ($app['env'] === 'local' && $app['debug'] === true) {
 require __DIR__ . '/../vendor/autoload.php';
 
 // init controller
-$controller = new Core\Controller;
-$controller->initRequest();
-
-$db_driver = config('database.driver');
-$driver = "DB\\{$db_driver}Driver";
-$driver = new $driver;
-
-$model = new Core\Model;
-$model->setConnection($controller->connection);
-echo '<pre>';
-echo print_r($model);
-echo '</pre>';
+$app = new Core\App;

@@ -4,7 +4,7 @@ namespace Core;
 
 use \DB\MySqlDriver;
 
-class Model extends MySqlDriver
+class Model
 {
     // protected $result;
     protected static $connection;

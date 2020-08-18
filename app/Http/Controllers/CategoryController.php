@@ -2,11 +2,6 @@
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        
-    }
-
     public function index() {
     	$home = 'hello';
     	$cate = Category::all();
@@ -14,5 +9,9 @@ class CategoryController extends Controller
     	echo print_r($cate);
     	echo '</pre>';die;
     	return view('home.categories.index', compact('home'));
+    }
+
+    public function show() {
+        echo __METHOD__;
     }
 }

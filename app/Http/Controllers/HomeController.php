@@ -6,18 +6,11 @@ use Core\Controller;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        
-    }
-
-    public function index()
-    {
+    public function index() {
     	echo __METHOD__;
     }
 
-     public function update()
-    {
+    public function show() {
     	echo __METHOD__;
     }
 }

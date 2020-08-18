@@ -4,7 +4,7 @@ namespace Core;
 
 abstract class Database
 {
-    abstract static function get();
+    abstract function get();
     abstract function find($id);
     abstract function all($columns);
     abstract static function update();

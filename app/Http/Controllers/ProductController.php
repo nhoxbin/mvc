@@ -14,9 +14,9 @@ class ProductController extends Controller
 
     public function index()
     {
-    	$products = Product::find(1);
+    	/*$products = Product::where('id', 1)->get();
         echo '<pre>';
         echo print_r($products);
-        echo '</pre>';
+        echo '</pre>';*/
     }
 }

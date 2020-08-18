@@ -1,9 +1,7 @@
 <?php
 
-$gPath = include '../config/path.php';
-
 // load helper and mvc
-$files = array_merge(glob($gPath['helper'] . '/*'), glob($gPath['core'] . '/*'));
+$files = array_merge(glob('../app/Helpers/*'), glob('../core/*'));
 foreach ($files as $file) {
 	require $file;
 }
@@ -19,5 +17,14 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // init controller
 $controller = new Core\Controller;
-// model must be load first
 $controller->initRequest();
+
+$db_driver = config('database.driver');
+$driver = "DB\\{$db_driver}Driver";
+$driver = new $driver;
+
+$model = new Core\Model;
+$model->setConnection($controller->connection);
+echo '<pre>';
+echo print_r($model);
+echo '</pre>';

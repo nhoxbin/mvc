@@ -1,14 +1,13 @@
 <?php
 
-namespace Database\Drivers;
+namespace DB;
 
-use Core\Model;
 use Core\Database;
 
-class Mysql extends Database
+class MySqlDriver extends Database
 {
-    protected $table;
     private $result;
+    protected $table;
     protected static $connection;
 
     public function connect($db) {
@@ -31,7 +30,7 @@ class Mysql extends Database
         return $this->table;
     }
 
-    public static function get() {
+    public function get() {
 
     }
 
@@ -46,15 +45,24 @@ class Mysql extends Database
         return $data;
     }
 
-    public function where($id, $value, $cond='=') {
-        $sql = "SELECT * FROM {$this->getTable()} WHERE {$id}$cond{$value}";
+    public function where(...$cond) {
+        if ($cond[2] === '=') {
+            $condition = $cond[2];
+            $value = $cond[1];
+        } else {
+            $condition = $cond[1];
+            $value = $cond[2];
+        }
+
+        $sql = "SELECT * FROM {$this->getTable()} WHERE {$cond[0]} $condition {$value}";
         $q = self::query($sql);
         $data = [];
         while ($row = mysqli_fetch_assoc($q)) {
             $data[] = $row;
         }
         mysqli_free_result($q);
-        return $data;
+        $this->result = $data;
+        return $this;
     }
 
     public function find($id) {
@@ -91,7 +99,7 @@ class Mysql extends Database
     	return false;
     }
 
-    public function __destruct() {
+    public function disconnect() {
         mysqli_close(self::$connection);
     }
 }

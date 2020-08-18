@@ -16,9 +16,8 @@ class Request
     }
 
     public function initController($name) {
-		global $gPath;
     	$controllerName = ucfirst(strtolower($name ?? $this->controller)) . 'Controller';
-		if (!file_exists("{$gPath['controller']}/$controllerName.php")) {
+		if (!file_exists(base_dir('controller') . "/$controllerName.php")) {
 			show404error('controller');
 		}
 		$controller = "App\\Http\\Controllers\\$controllerName";

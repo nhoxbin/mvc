@@ -7,7 +7,7 @@ use Core\Database;
 class MySql extends Database
 {
     private $result;
-    protected $table;
+    protected static $table;
     public static $connection;
 
     public function __construct($db) {
@@ -20,16 +20,17 @@ class MySql extends Database
     }
 
     public function setTable($table) {
-        $this->table = $table;
+        self::$table = $table;
         return $this;
     }
 
-    public function getTable() {
-        return $this->table;
+    public static function getTable() {
+        return self::$table;
     }
 
     public static function all($columns = ['*']) {
-        $sql = "SELECT * FROM {$this->getTable()}";
+        $table = self::getTable();
+        $sql = "SELECT * FROM {$table}";
         $q = self::query($sql);
         $data = [];
         while ($row = mysqli_fetch_assoc($q)) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Product;
+use App\Model\Category;
 use Core\Controller;
 
 class ProductController extends Controller
@@ -10,10 +11,8 @@ class ProductController extends Controller
     public function index()
     {
     	// echo __METHOD__;
-    	$products = Product::where('id', 1)->get();
-        echo '<pre>';
-        echo print_r($products);
-        echo '</pre>';
+    	$products = Category::all();
+        return view('home.products.index', compact('products'));
     }
 
     public function show() {

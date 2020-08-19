@@ -10,15 +10,13 @@ class MySql extends Database
     protected $table;
     protected static $connection;
 
-    public function connect($db) {
+    public function __construct($db) {
         $connection = mysqli_connect($db['host'], $db['username'], $db['password'], $db['database']);
         if (mysqli_connect_errno() === 0) {
             mysqli_set_charset($connection, 'utf8');
 
             self::$connection = $connection;
-            return $connection;
         }
-        return false;
     }
 
     public function setTable($table) {
@@ -99,7 +97,7 @@ class MySql extends Database
         return $this->result;
     }
 
-    public function disconnect() {
+    public function __destruct() {
         mysqli_close(self::$connection);
     }
 }

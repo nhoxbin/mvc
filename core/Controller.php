@@ -18,11 +18,11 @@ class Controller
         if (!file_exists(base_dir('database') . "/{$db['driver']}.php")) {
             show404error('Database Driver');
         }
-        $this->db_driver = new $db_driver;
-        $connection = $this->db_driver->connect($db);
-        
+        $this->db_driver = new $db_driver($db);
+        $this->db_driver->connect($db);
+
         $model = new Model;
         $model::setDBDriver($this->db_driver);
-        $model::setConnection($connection);
+        $model::setConnection($this->db_driver->connection);
     }
 }

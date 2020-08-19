@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use Core\Model;
-
 class Controller
 {
     protected $db_driver;
@@ -22,5 +20,9 @@ class Controller
         }
         $this->db_driver = new $db_driver;
         $connection = $this->db_driver->connect($db);
+        
+        $model = new Model;
+        $model::setDBDriver($this->db_driver);
+        $model::setConnection($connection);
     }
 }

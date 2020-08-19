@@ -5,6 +5,7 @@ namespace Core;
 abstract class Database
 {
 	abstract function connect($db);
+	
     abstract function get();
     abstract function find($id);
     abstract function all($columns);

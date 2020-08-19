@@ -13,17 +13,25 @@ class Model
         self::$connection = $connection;
     }
 
+    public static function setDBDriver($driver) {
+        self::$driver = $driver;
+    }
+
     public static function setTable($table) {
         return self::$driver->setTable($table);
     }
 
-    public static function all() {
-        return self::setTable((new static)->table)->all();
+    public static function all($columns = ['*']) {
+        return self::setTable((new static)->table)->all($columns);
     }
 
-    /*public function get() {
+    public static function where(...$condition) {
+        return self::setTable((new static)->table)->where($condition);
+    }
+
+    public function get() {
         echo '<pre>';
-        echo print_r($this->result);
-        echo '</pre>';die;
-    }*/
+        echo print_r($this);
+        echo '</pre>';
+    }
 }

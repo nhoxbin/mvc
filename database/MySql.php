@@ -30,11 +30,7 @@ class MySql extends Database
         return $this->table;
     }
 
-    public function get() {
-
-    }
-
-    public function all($columns) {
+    public function all($columns = ['*']) {
         $sql = "SELECT * FROM {$this->getTable()}";
         $q = self::query($sql);
         $data = [];
@@ -45,16 +41,16 @@ class MySql extends Database
         return $data;
     }
 
-    public function where(...$cond) {
-        if ($cond[2] === '=') {
-            $condition = $cond[2];
-            $value = $cond[1];
+    public function where($condition) {
+        if (count($condition) === 3) {
+            $cond = $condition[1];
+            $value = $condition[2];
         } else {
-            $condition = $cond[1];
-            $value = $cond[2];
+            $cond = '=';
+            $value = $condition[1];
         }
 
-        $sql = "SELECT * FROM {$this->getTable()} WHERE {$cond[0]} $condition {$value}";
+        $sql = "SELECT * FROM {$this->getTable()} WHERE {$condition[0]} $cond {$value}";
         $q = self::query($sql);
         $data = [];
         while ($row = mysqli_fetch_assoc($q)) {
@@ -97,6 +93,10 @@ class MySql extends Database
             }
     	}
     	return false;
+    }
+
+    public function get() {
+        return $this->result;
     }
 
     public function disconnect() {

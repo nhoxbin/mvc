@@ -19,10 +19,13 @@ class Controller
             show404error('Database Driver');
         }
         $this->db_driver = new $db_driver($db);
-        $this->db_driver->connect($db);
 
         $model = new Model;
         $model::setDBDriver($this->db_driver);
-        $model::setConnection($this->db_driver->connection);
+        $model::setConnection($this->db_driver::$connection);
+    }
+
+    public function __destruct() {
+        $this->db_driver->disconnect();
     }
 }

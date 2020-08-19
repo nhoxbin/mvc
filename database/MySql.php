@@ -8,7 +8,7 @@ class MySql extends Database
 {
     private $result;
     protected $table;
-    protected static $connection;
+    public static $connection;
 
     public function __construct($db) {
         $connection = mysqli_connect($db['host'], $db['username'], $db['password'], $db['database']);
@@ -28,7 +28,7 @@ class MySql extends Database
         return $this->table;
     }
 
-    public function all($columns = ['*']) {
+    public static function all($columns = ['*']) {
         $sql = "SELECT * FROM {$this->getTable()}";
         $q = self::query($sql);
         $data = [];
@@ -59,7 +59,7 @@ class MySql extends Database
         return $this;
     }
 
-    public function find($id) {
+    public static function find($id) {
         $sql = "SELECT * FROM {$this->getTable()} WHERE id={$id}";
         $q = self::query($sql);
         $data = mysqli_fetch_assoc($q);
@@ -97,7 +97,7 @@ class MySql extends Database
         return $this->result;
     }
 
-    public function __destruct() {
+    public function disconnect() {
         mysqli_close(self::$connection);
     }
 }

@@ -1,10 +1,13 @@
 <?php
 
+function handle_file($file='') {
+	$file = base_dir('views') . '/' . str_replace('.', '/', $file) . '.php';
+	return $file;
+}
+
 function view($file, $data=[]) {
 	extract($data);
-	$view = base_dir('views') . '/' . str_replace('.', '/', $file) . '.php';
-	if (!file_exists($view)) {
-		return false;
-	}
+	$view = handle_file($file);
+	$page = handle_file($page);
 	require $view;
 }

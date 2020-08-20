@@ -4,12 +4,17 @@ namespace Core;
 
 class Controller
 {
+    protected $request;
     protected $db_driver;
-    protected $connection;
 
-
-    public function __construct() {
+    public function __construct($request) {
+        $this->setRequest($request);
         $this->initDBDriver();
+    }
+
+    public function setRequest($request) {
+        $this->request = $request;
+        return $this;
     }
 
     public function initDBDriver() {

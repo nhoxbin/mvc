@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Model\Product;
-use App\Model\Category;
 use Core\Controller;
 
 class ProductController extends Controller
 {
     public function index()
     {
-    	// echo __METHOD__;
-    	$products = Category::all();
-        return view('home.products.index', compact('products'));
+    	$products = Product::all();
+    	$data = [
+    		'title' => 'Sản phẩm',
+    		'page' => 'home.products.index',
+    		'products' => $products
+    	];
+        return view('home.layouts.app', $data);
     }
 
     public function show() {

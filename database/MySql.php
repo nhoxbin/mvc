@@ -28,7 +28,7 @@ class MySql extends Database
         return self::$table;
     }
 
-    public static function all($columns = ['*']) {
+    public function all($columns = ['*']) {
         $table = self::getTable();
         $sql = "SELECT * FROM {$table}";
         $q = self::query($sql);
@@ -37,7 +37,8 @@ class MySql extends Database
             $data[] = $row;
         }
         mysqli_free_result($q);
-        return $data;
+        $this->result = $data;
+        return $this;
     }
 
     public function where($condition) {
@@ -60,15 +61,16 @@ class MySql extends Database
         return $this;
     }
 
-    public static function find($id) {
+    public function find($id) {
         $sql = "SELECT * FROM {$this->getTable()} WHERE id={$id}";
         $q = self::query($sql);
         $data = mysqli_fetch_assoc($q);
         mysqli_free_result($q);
-        return $data;
+        $this->result = $data;
+        return $this;
     }
 
-    public static function update() {
+    public function update() {
 
     }
     

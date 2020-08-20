@@ -1,14 +1,20 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use App\Model\Category;
+use Core\Controller;
+
 class CategoryController extends Controller
 {
     public function index() {
-    	$home = 'hello';
     	$cate = Category::all();
-    	echo '<pre>';
-    	echo print_r($cate);
-    	echo '</pre>';die;
-    	return view('home.categories.index', compact('home'));
+    	$data = [
+            'title' => 'Danh mục',
+            'page' => 'home.categories.index',
+            'categories' => $cate
+        ];
+        return view('home.layouts.app', $data);
     }
 
     public function show() {

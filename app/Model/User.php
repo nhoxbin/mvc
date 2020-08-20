@@ -6,7 +6,5 @@ use Core\Model;
 
 class User extends Model
 {
-    public function __construct() {
-        echo __METHOD__;
-    }
+    protected $table = 'users';
 }

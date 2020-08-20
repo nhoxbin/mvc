@@ -22,16 +22,14 @@ class Model
     }
 
     public static function all($columns = ['*']) {
-        return self::setTable((new static)->table)->all($columns);
+        return self::setTable((new static)->table)->all($columns)->get();
+    }
+
+    public static function find($id) {
+        return self::setTable((new static)->table)->find($id)->get();
     }
 
     public static function where(...$condition) {
         return self::setTable((new static)->table)->where($condition);
-    }
-
-    public function get() {
-        echo '<pre>';
-        echo print_r($this);
-        echo '</pre>';
     }
 }

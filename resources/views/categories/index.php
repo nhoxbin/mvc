@@ -12,17 +12,11 @@
 </table>
 
 <?php
-
-$css = "
-<style>
-	table, th, td {
-	  border: 1px solid black;
-	}
-</style>
-<link rel='stylesheet' href='abc.css'>
-";
-
-$js = "
-<script src='abc.css'></script>
-";
+	$css = "
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		}
+	</style>
+	";
 ?>

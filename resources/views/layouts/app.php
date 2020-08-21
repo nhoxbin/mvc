@@ -4,17 +4,14 @@
 	<meta charset="UTF-8">
 	<title><?= $title ?></title>
 
-	<link rel="stylesheet" href="">
-	<?= $css ?>
+	<?= push($css) ?>
 </head>
 <body>
 	<?php include 'blocks/header.php'; ?>
 	<?php include 'blocks/aside.php'; ?>
-	<?php include $page; ?>
+	<?= $page ?>
 	<?php include 'blocks/footer.php'; ?>
 </body>
 
-
-<script src=""></script>
-<?= $js ?>
+<?= push($js) ?>
 </html>

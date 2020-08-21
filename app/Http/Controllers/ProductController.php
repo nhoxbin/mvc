@@ -12,10 +12,10 @@ class ProductController extends Controller
     	$products = Product::all();
     	$data = [
     		'title' => 'Sản phẩm',
-    		'page' => 'home.products.index',
+    		'page' => 'products.index',
     		'products' => $products
     	];
-        return view('home.layouts.app', $data);
+        return view('layouts.app', $data);
     }
 
     public function show() {

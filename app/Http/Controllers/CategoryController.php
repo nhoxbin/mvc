@@ -11,10 +11,10 @@ class CategoryController extends Controller
     	$cate = Category::all();
     	$data = [
             'title' => 'Danh mục',
-            'page' => 'home.categories.index',
+            'page' => 'categories.index',
             'categories' => $cate
         ];
-        return view('home.layouts.app', $data);
+        return view('layouts.app', $data);
     }
 
     public function show() {

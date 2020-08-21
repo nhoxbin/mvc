@@ -4,14 +4,18 @@ namespace Core;
 
 class App
 {
-	protected $request;
+	public $session;
+    protected $request;
     protected $params = [];
     
 	protected $controller = 'Home';
 	protected $method = 'index';
 
     public function __construct() {
+        $this->session = new Session;
         $this->request = new Request;
+        $this->view = new View;
+        
         $this->initController($this->request->get('controller'));
         $this->initMethod($this->request->get('method'));
         call_user_func_array([$this->controller, $this->method], $this->params);
@@ -33,5 +37,9 @@ class App
         	show404error('Method');
         }
         $this->method = $method;
+    }
+
+    public function __destruct() {
+        // $this->session->;
     }
 }

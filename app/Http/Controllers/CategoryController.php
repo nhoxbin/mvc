@@ -14,7 +14,7 @@ class CategoryController extends Controller
             'page' => 'categories.index',
             'categories' => $cate
         ];
-        return view('layouts.app', $data);
+        return $this->view('layouts.app', $data);
     }
 
     public function show() {

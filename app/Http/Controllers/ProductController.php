@@ -15,7 +15,7 @@ class ProductController extends Controller
     		'page' => 'products.index',
     		'products' => $products
     	];
-        return view('layouts.app', $data);
+        return $this->view('layouts.app', $data);
     }
 
     public function show() {

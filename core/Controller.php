@@ -4,12 +4,23 @@ namespace Core;
 
 class Controller
 {
+    protected $view;
     protected $request;
     protected $db_driver;
 
-    public function __construct($request) {
+    public function __construct($view, $request) {
+        $this->setView($view);
         $this->setRequest($request);
         $this->initDBDriver();
+    }
+
+    public function setView($view) {
+        $this->view = $view;
+        return $this;
+    }
+
+    public function view($file, $data=[], $master_layout='layouts.app') {
+        $this->view->load($file, $data, $master_layout);
     }
 
     public function setRequest($request) {

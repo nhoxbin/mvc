@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title><?= $title ?></title>
 
-	<?= push($css) ?>
+	<!-- <?= $css ?> -->
 </head>
 <body>
 	<?php include 'blocks/header.php'; ?>
@@ -13,5 +13,5 @@
 	<?php include 'blocks/footer.php'; ?>
 </body>
 
-<?= push($js) ?>
+<!-- <?= $js ?> -->
 </html>

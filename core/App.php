@@ -28,7 +28,7 @@ class App
         	show404error('Controller');
         }
     	$controller = "App\\Http\\Controllers\\$controllerName";
-        $this->controller = new $controller($this->request);
+        $this->controller = new $controller($this->view, $this->request);
     }
 
     public function initMethod($method) {

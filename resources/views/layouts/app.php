@@ -4,14 +4,15 @@
 	<meta charset="UTF-8">
 	<title><?= $title ?></title>
 
-	<!-- <?= $css ?> -->
+	@yield('css')
 </head>
 <body>
 	<?php include 'blocks/header.php'; ?>
 	<?php include 'blocks/aside.php'; ?>
-	<?= $page ?>
+	@yield('page')
 	<?php include 'blocks/footer.php'; ?>
 </body>
 
-<!-- <?= $js ?> -->
+
+@yield('js')
 </html>

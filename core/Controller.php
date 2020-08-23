@@ -19,8 +19,8 @@ class Controller
         return $this;
     }
 
-    public function view($file, $data=[], $master_layout='layouts.app') {
-        $this->view->load($file, $data, $master_layout);
+    public function view($file, $data=[]) {
+        $this->view->load($file, $data);
     }
 
     public function setRequest($request) {
@@ -38,7 +38,7 @@ class Controller
 
         $model = new Model;
         $model::setDBDriver($this->db_driver);
-        $model::setConnection($this->db_driver::$connection);
+        $model::setConnection($this->db_driver->connection);
     }
 
     public function __destruct() {

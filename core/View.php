@@ -14,8 +14,7 @@ class View
 		return $file;
 	}
 
-	public function load($page, $data=[], $layout='layouts.app') {
-		$this->layout = $layout;
+	public function load($page, $data=[]) {
 		extract($data);
 
         // load page first
@@ -24,16 +23,20 @@ class View
 	    $page = ob_get_contents();
         ob_end_clean();
 
-        // after load page, load master layout and read what page have
+        // get the master layout
+        preg_match("/@extends\((.+)\)/", $page, $layout);
+        $layout = $layout[1] ? trim($layout[1], '\'"') : '';
+
+        // after load page, load master layout. read and put page into masterlayout
     	ob_start(function($buffer) use ($page) {
-    		preg_match_all('/\@yield\(\'(.+)\'\)/', $buffer, $type);
+    		preg_match_all('/@yield\((.+)\)/', $buffer, $type);
     		for ($i = 0; $i < count($type[1]); $i++) {
-	    		preg_match("/\@section\(\'{$type[1][$i]}\'\)(.+?)\@endsection/s", $page, $section);
+	    		preg_match("/@section\({$type[1][$i]}\)(.+?)@endsection/s", $page, $section);
 	    		$buffer = str_replace($type[0][$i], $section[1], $buffer);
     		}
 			return $buffer;
 		});
-	    require_once $this->handle_file($this->layout);
+	    require_once $this->handle_file($layout);
 	    // $master_layouts = ob_get_contents();
         ob_end_flush();
 	}

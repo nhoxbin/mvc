@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 @section('page')
 <ul>
 	<?php foreach ($products as $product) { ?>

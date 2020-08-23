@@ -6,6 +6,9 @@ abstract class Database
 {
 	// abstract function connect($db);
 	
+    abstract function setTable($table);
+    abstract function getTable();
+
     abstract function get();
     abstract function find($id);
     abstract function all($columns);
@@ -13,7 +16,7 @@ abstract class Database
     
     abstract function create();
     abstract function store();
-    abstract function delete();
+    abstract function delete($id);
 
-    abstract static function query($sql);
+    abstract function query($sql);
 }

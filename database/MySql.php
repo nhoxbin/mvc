@@ -6,32 +6,30 @@ use Core\Database;
 
 class MySql extends Database
 {
+    public $connection;
     private $result;
-    protected static $table;
-    public static $connection;
+    protected $table;
 
     public function __construct($db) {
         $connection = mysqli_connect($db['host'], $db['username'], $db['password'], $db['database']);
         if (mysqli_connect_errno() === 0) {
             mysqli_set_charset($connection, 'utf8');
 
-            self::$connection = $connection;
+            $this->connection = $connection;
         }
     }
 
     public function setTable($table) {
-        self::$table = $table;
+        $this->table = $table;
         return $this;
     }
 
-    public static function getTable() {
-        return self::$table;
+    public function getTable() {
+        return $this->table;
     }
 
     public function all($columns = ['*']) {
-        $table = self::getTable();
-        $sql = "SELECT * FROM {$table}";
-        $q = self::query($sql);
+        $q = $this->query("SELECT * FROM {$this->getTable()}");
         $data = [];
         while ($row = mysqli_fetch_assoc($q)) {
             $data[] = $row;
@@ -82,12 +80,13 @@ class MySql extends Database
 
     }
 
-    public function delete() {
-
+    public function delete($id) {
+        $sql = "DELETE FROM {$this->getTable()} WHERE id=$id";
+        return $this->query($sql);
     }
 
-    public static function query($sql) {
-    	if ($q = mysqli_query(self::$connection, $sql)) {
+    public function query($sql) {
+    	if ($q = mysqli_query($this->connection, $sql)) {
             if (mysqli_num_rows($q) > 0) {
                 // mysqli_free_result($q);
                 return $q;
@@ -101,6 +100,6 @@ class MySql extends Database
     }
 
     public function disconnect() {
-        mysqli_close(self::$connection);
+        mysqli_close($this->connection);
     }
 }
